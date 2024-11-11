@@ -2,7 +2,6 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
-    id 'org.spongepowered.mixin' version "${mixin_gradle_version}"
 }
 
 version = mod_version
@@ -18,10 +17,6 @@ minecraft {
         client {
             args "--username=InDev"
 
-            jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
-            jvmArg "-Dmixin.hotSwap=true"
-            jvmArg "-Dmixin.checks.interfaces=true"
-
             workingDirectory project.file('run')
 
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -29,10 +24,6 @@ minecraft {
         }
 
         server {
-
-            jvmArg "-Dfml.coreMods.load=${mixin_loader_class}"
-            jvmArg "-Dmixin.hotSwap=true"
-            jvmArg "-Dmixin.checks.interfaces=true"
 
             workingDirectory project.file('run')
 
@@ -49,18 +40,8 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-    implementation "org.spongepowered:mixin:${mixin_version}"
-    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
-    implementation "io.github.llamalad7:mixinextras-common:${mixin_extras_version}"
-
-    implementation fg.deobf("curse.maven:fermiumbooter-${fermiumbooter_version}")
 	
     implementation fg.deobf("curse.maven:jei-${jei_version}")
-}
-
-mixin {
-    add sourceSets.main, "mixins.${mod_id}.refmap.json"
 }
 
 processResources {
@@ -89,11 +70,7 @@ jar {
                 'Implementation-Title'    : mod_name,
                 'Implementation-Vendor'   : mod_author,
                 'Implementation-Version'  : mod_version,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                'FMLCorePlugin': mixin_loader_class,
-                'FMLCorePluginContainsFMLMod': 'true',
-                'ForceLoadAsMod': 'true', //Comment out in dev environment, uncomment for building
-                'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker'
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
