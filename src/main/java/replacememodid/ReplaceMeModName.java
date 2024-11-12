@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import replacememodid.handlers.ModRegistry;
 import replacememodid.proxy.CommonProxy;
 
-@Mod(modid = ReplaceMeModName.MODID, version = ReplaceMeModName.VERSION, name = ReplaceMeModName.NAME, dependencies = "required-after:fermiumbooter")
+@Mod(modid = ReplaceMeModName.MODID, version = ReplaceMeModName.VERSION, name = ReplaceMeModName.NAME)
 public class ReplaceMeModName {
     public static final String MODID = "replacememodid";
     public static final String VERSION = "ReplaceMe.Mod.Version";
